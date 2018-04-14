@@ -71,10 +71,10 @@ define( 'HDOM_INFO_TEXT', 4 );
 define( 'HDOM_INFO_INNER', 5 );
 define( 'HDOM_INFO_OUTER', 6 );
 define( 'HDOM_INFO_ENDSPACE', 7 );
-define( 'DEFAULT_TARGET_CHARSET', 'UTF-8' );
+define( 'DEFAULT_TARGET_CHARSET', 'UTF-8//IGNORE' );
 define( 'DEFAULT_BR_TEXT', "\r\n" );
 define( 'DEFAULT_SPAN_TEXT', " " );
-define( 'MAX_FILE_SIZE', 600000 );
+define( 'MAX_FILE_SIZE', 6000000 );
 // helper functions
 // -----------------------------------------------------------------------------
 class SimpleHTMLDom extends \yii\helpers\Inflector
@@ -787,7 +787,7 @@ class simple_html_dom_node
                 $converted_text = $text;
             } //( strcasecmp( $targetCharset, 'UTF-8' ) == 0 ) && ( $this->is_utf8( $text ) )
             else {
-                $converted_text = iconv( $sourceCharset, $targetCharset, $text );
+                $converted_text = mb_convert_encoding( $text, $targetCharset, $sourceCharset );
             }
         } //!empty( $sourceCharset ) && !empty( $targetCharset ) && ( strcasecmp( $sourceCharset, $targetCharset ) != 0 )
         // Lets make sure that we don't have that silly BOM issue with any of the utf-8 text we output.
